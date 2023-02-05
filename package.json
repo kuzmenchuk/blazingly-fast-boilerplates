@@ -9,15 +9,20 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:blazingly-fast-boilerplates.helloWorld"
-  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "blazingly-fast-boilerplates.helloWorld",
-        "title": "Hello World"
+        "command": "blazingly-fast-boilerplates.createBoilerplate",
+        "title": "BFB: Create Boilerplate..."
+      },
+      {
+        "command": "blazingly-fast-boilerplates.addNewTemplate",
+        "title": "BFB: Add New Template"
+      },
+      {
+        "command": "blazingly-fast-boilerplates.addVariables",
+        "title": "BFB: Add New Variable"
       }
     ]
   },
