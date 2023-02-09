@@ -1,10 +1,10 @@
 import { UserCommunicationService } from "../../../services/user-communication.service";
 import { TPipeFn } from "../add-new-template.types";
 
-const userCommunication = UserCommunicationService.getInstance();
+const userCommunicationInstance = UserCommunicationService.getInstance();
 
 export const getTemplateName: TPipeFn = async (arg) => {
-  arg.data.name = await userCommunication.askInput({
+  arg.data.name = await userCommunicationInstance.askInput({
     title: "Please, provide the name of the new template.",
   });
 

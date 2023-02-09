@@ -2,14 +2,14 @@ import { PathService } from "../../../services/path.service";
 import { UserCommunicationService } from "../../../services/user-communication.service";
 import { TPipeFn } from "../add-new-template.types";
 
-const userCommunication = UserCommunicationService.getInstance();
-const path = PathService.getInstance();
+const userCommunicationInstance = UserCommunicationService.getInstance();
+const pathInstance = PathService.getInstance();
 
 const CORRECT_FOLDER_MSSG = "Yeah, that's correct!";
 const WRONG_COLDER_MSSG = "Nope, let me choose one more time";
 
 export const getPath: TPipeFn = async (arg) => {
-  await userCommunication.askOptions(["OK"], {
+  await userCommunicationInstance.askOptions(["OK"], {
     title:
       "Next, select the folder where entities (from boilerplate) will be created",
   });
@@ -20,7 +20,7 @@ export const getPath: TPipeFn = async (arg) => {
 };
 
 const askChooseFolder = async (): Promise<string> => {
-  const file = await userCommunication.askChooseFile({
+  const file = await userCommunicationInstance.askChooseFile({
     canSelectMany: false,
     title: "Please, select the folder where entity should be created",
     openLabel: "Select",
@@ -28,10 +28,10 @@ const askChooseFolder = async (): Promise<string> => {
     canSelectFolders: true,
   });
 
-  const relativePath = path.createRelative(file.path);
+  const relativePath = pathInstance.createRelative(file.path);
 
   const OK =
-    (await userCommunication.askOptions(
+    (await userCommunicationInstance.askOptions(
       [CORRECT_FOLDER_MSSG, WRONG_COLDER_MSSG],
       {
         title: "Is the folder correct?".concat(" Path: " + relativePath),

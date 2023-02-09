@@ -2,8 +2,8 @@ import { PathService } from "./path.service";
 import { FsService } from "./fs.service";
 import { assert } from "../utils/index";
 
-const path = PathService.getInstance();
-const fs = FsService.getInstance();
+const pathInstance = PathService.getInstance();
+const fsInstance = FsService.getInstance();
 
 export interface IConfig {
   globalVariables: IVariable[];
@@ -28,8 +28,12 @@ export class ConfigService {
       this.instance = new ConfigService();
     }
 
-    fs.createIfNotExists(path.dotBfb(), "dir");
-    fs.createIfNotExists(path.config(), "file", JSON.stringify(emptyConfig));
+    fsInstance.createIfNotExists(pathInstance.dotBfb(), "dir");
+    fsInstance.createIfNotExists(
+      pathInstance.config(),
+      "file",
+      JSON.stringify(emptyConfig)
+    );
 
     return this.instance;
   }
@@ -37,7 +41,7 @@ export class ConfigService {
   public addVariables(variables: IVariable[]) {
     const config = this.config();
     config.globalVariables.push(...variables);
-    fs.writeFile(path.config(), JSON.stringify(config));
+    fsInstance.writeFile(pathInstance.config(), JSON.stringify(config));
   }
 
   public getVariable(name: string) {
@@ -51,7 +55,7 @@ export class ConfigService {
   }
 
   private config() {
-    const json = fs.readFile(path.config());
+    const json = fsInstance.readFile(pathInstance.config());
     return JSON.parse(json) as IConfig;
   }
 }

@@ -5,9 +5,9 @@ import { pipe, replaceWithValues } from "../../utils";
 import { IPipeFnOptions } from "./create-boilerplate.types";
 import { getTemplateName, getVariableValues } from "./utils";
 
-const templates = TemplatesService.getInstance();
-const fs = FsService.getInstance();
-const path = PathService.getInstance();
+const templatesInstance = TemplatesService.getInstance();
+const fsInstance = FsService.getInstance();
+const pathInstance = PathService.getInstance();
 
 const boilerplatePipe = pipe(getTemplateName, getVariableValues);
 
@@ -21,10 +21,12 @@ export const createBoilerplate = async () => {
 
   await boilerplatePipe(boilerplateData);
 
-  const templateConfig = templates.config(boilerplateData.data.templateName);
+  const templateConfig = templatesInstance.config(
+    boilerplateData.data.templateName
+  );
 
   if (templateConfig.isFolder) {
-    templateConfig.path = path.createAbsolute(
+    templateConfig.path = pathInstance.createAbsolute(
       [
         templateConfig.path,
         // TOFIX!
@@ -32,12 +34,12 @@ export const createBoilerplate = async () => {
       ].join("/")
     );
   } else {
-    templateConfig.path = path.createAbsolute(templateConfig.path);
+    templateConfig.path = pathInstance.createAbsolute(templateConfig.path);
   }
 
-  fs.createDir(templateConfig.path);
+  fsInstance.createDir(templateConfig.path);
 
-  const templateAllFileNames = templates.getTemplateFiles(
+  const templateAllFileNames = templatesInstance.getTemplateFiles(
     boilerplateData.data.templateName
   );
 
@@ -45,23 +47,25 @@ export const createBoilerplate = async () => {
     replaceWithValues(data, boilerplateData.data.variableValues);
 
   const filesToCreate = templateAllFileNames.map((fileName) => {
-    const filePath = path.templates(
+    const filePath = pathInstance.templates(
       boilerplateData.data.templateName,
       fileName
     );
-    const fileData = fs.readFile(filePath);
+    const fileData = fsInstance.readFile(filePath);
     const fileDataReplaced = adjustVariables(fileData);
     const fileNameReplaced = adjustVariables(fileName);
     return [fileNameReplaced, fileDataReplaced];
   });
 
   filesToCreate.forEach(([name, data]) => {
-    fs.createFile(templateConfig.path.concat("/" + name), data);
+    fsInstance.createFile(templateConfig.path.concat("/" + name), data);
   });
 
   if (templateConfig.rootIndex) {
-    const rootIndexPath = path.createAbsolute(templateConfig.rootIndex.path);
-    fs.appendFile(
+    const rootIndexPath = pathInstance.createAbsolute(
+      templateConfig.rootIndex.path
+    );
+    fsInstance.appendFile(
       rootIndexPath,
       adjustVariables(templateConfig.rootIndex.pattern).concat("\n")
     );

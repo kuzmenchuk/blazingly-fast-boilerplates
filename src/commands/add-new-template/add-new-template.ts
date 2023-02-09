@@ -17,9 +17,9 @@ import {
 import { IPipeFnOptions } from "./add-new-template.types";
 import { UserCommunicationService } from "../../services/user-communication.service";
 
-const templates = TemplatesService.getInstance();
-const globalConfig = ConfigService.getInstance();
-const userCommunication = UserCommunicationService.getInstance();
+const templatesInstance = TemplatesService.getInstance();
+const globalConfigInstance = ConfigService.getInstance();
+const userCommunicationInstance = UserCommunicationService.getInstance();
 
 const newTemplatePipe = pipe<IPipeFnOptions>(
   getTemplateName,
@@ -40,10 +40,10 @@ export const addNewTemplate = async () => {
     rootIndex: undefined,
   };
 
-  let variables = globalConfig.getAllVariables();
+  let variables = globalConfigInstance.getAllVariables();
 
   if (variables.length === 0) {
-    await userCommunication.askOptions(["OK"], {
+    await userCommunicationInstance.askOptions(["OK"], {
       title:
         "You don't have any variables. Add at least one to be able to use boilerplates.",
     });
@@ -55,9 +55,9 @@ export const addNewTemplate = async () => {
     helperData: { variables },
   });
 
-  templates.addTemplate(addTemplateData.data);
+  templatesInstance.addTemplate(addTemplateData.data);
 
-  userCommunication.showMessage({
+  userCommunicationInstance.showMessage({
     type: "info",
     message: "Template was successfully added!",
   });
