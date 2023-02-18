@@ -26,6 +26,7 @@ export const copy = {
   provideNameOfTemplate: "Please, provide the name of new template.",
   chooseVarsYouWannaUse:
     "Please, choose the variables you want to use for this template.",
+  selectAtLeastOneVar: "Please, select at least one variable",
   provideNameOfVar:
     "Please, provide the name of the variable. Use uppercase snake case with $$ at the beginning.",
   provideDescriptionOfVar: "Please, provide the description of the variable",

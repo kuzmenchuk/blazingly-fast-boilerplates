@@ -48,12 +48,12 @@ export const addNewTemplate = async () => {
     variables = await addVariables();
   }
 
-  const addTemplateData = await newTemplatePipe({
+  const { data } = await newTemplatePipe({
     data: { name: "", config: emptyConfig, fileNames: [] },
     helperData: { variables },
   });
 
-  templatesInstance.addTemplate(addTemplateData.data);
+  templatesInstance.addTemplate(data);
 
   userCommunicationInstance.showMessage({
     type: "info",
