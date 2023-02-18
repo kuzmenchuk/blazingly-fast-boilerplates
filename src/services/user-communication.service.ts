@@ -50,12 +50,15 @@ export class UserCommunicationService {
   }
 
   public async askOptions(items: string[], options?: vscode.QuickPickOptions) {
-    const result = await vscode.window.showQuickPick(items, options);
+    const result = await vscode.window.showQuickPick(items, {
+      ignoreFocusOut: true,
+      ...options,
+    });
     return assert(result);
   }
 
   public async askApprove(options?: vscode.QuickPickOptions) {
-    this.askOptions(["OK"], options);
+    await this.askOptions(["OK"], options);
   }
 
   public async askChooseFile(options: vscode.OpenDialogOptions) {

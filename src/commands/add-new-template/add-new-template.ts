@@ -45,7 +45,7 @@ export const addNewTemplate = async () => {
   if (variables.length === 0) {
     await userCommunicationInstance.askApprove({
       title:
-        "You don't have any variables. Add at least one to be able to use boilerplates.",
+        "It seems like you don't have any variables added. Please, add one to continue.",
     });
     variables = await addVariables();
   }

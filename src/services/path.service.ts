@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import * as vscode from "vscode";
 import * as nodePath from "path";
 import { assert, truthy } from "../utils/index";
@@ -15,12 +16,9 @@ export class PathService {
     return this.instance;
   }
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   public readonly CONFIG_ROOT_FOLDER = ".bfb";
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   public readonly TEMPLATES_FOLDER = "templates";
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  public readonly CONFIG_FILE_NAME = "bfb-config.json";
+  public readonly CONFIG_FILE_NAME = ".bfb-config.json";
 
   public workspaceUri() {
     const [workspace] = vscode.workspace.workspaceFolders ?? [];

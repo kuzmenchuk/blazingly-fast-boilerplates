@@ -60,8 +60,15 @@ export class TemplatesService {
       pathInstance.templateConfig(name),
       JSON.stringify(config)
     );
-    fileNames.forEach((fileName) =>
-      fsInstance.createFile(pathInstance.templates(name, fileName))
-    );
+    fileNames.forEach((fileName, i) => {
+      fsInstance.createFile(
+        pathInstance.templates(name, fileName),
+        i === 0
+          ? "Please, complete the template files. Use variables you created.\nDon't forget to remove these lines :)"
+          : undefined
+      );
+    });
+
+    fsInstance.openFile(pathInstance.templates(name, fileNames[0]));
   }
 }
