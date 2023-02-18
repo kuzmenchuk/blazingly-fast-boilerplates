@@ -1,14 +1,12 @@
 export const getStringPositionInFile = (
   file: string,
-  textToFind: string
+  regex: RegExp
 ): [number, number] | undefined => {
   const arrayOfLines = file.split("\n");
-  const lineIndex = arrayOfLines.findIndex((line) => line.includes(textToFind));
+  const line = arrayOfLines.findIndex((str) => regex.test(str));
 
-  if (lineIndex > -1) {
-    const line = lineIndex + 1;
-    const regex = new RegExp(textToFind);
-    const character = arrayOfLines[lineIndex].search(regex) + 1;
+  if (line > -1) {
+    const character = arrayOfLines[line].search(regex);
 
     return [line, character] as [number, number];
   }

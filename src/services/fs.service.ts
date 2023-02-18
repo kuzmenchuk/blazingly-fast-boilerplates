@@ -52,18 +52,9 @@ export class FsService {
     return fs.writeFileSync(path, data);
   }
 
-  public async openFile(
-    path: string,
-    { cursorPosition }: { cursorPosition?: [number, number] } = {}
-  ) {
+  public async openFile(path: string) {
     const pathUri = vscode.Uri.file(path);
     const textDocShowed = await vscode.window.showTextDocument(pathUri);
-
-    if (cursorPosition) {
-      console.log(cursorPosition);
-      textDocShowed.selection.with(new vscode.Position(...cursorPosition));
-    }
-
     return textDocShowed;
   }
 }
