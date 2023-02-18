@@ -31,32 +31,36 @@ const newTemplatePipe = pipe<IPipeFnOptions>(
 );
 
 export const addNewTemplate = async () => {
-  const emptyConfig: ITemplateConfig = {
-    variablesToAsk: [],
-    isFolder: false,
-    path: "",
-    fileToOpenAfterBoilerplateCreated: undefined,
-    rootIndex: undefined,
-  };
+  try {
+    const emptyConfig: ITemplateConfig = {
+      variablesToAsk: [],
+      isFolder: false,
+      path: "",
+      fileToOpenAfterBoilerplateCreated: undefined,
+      rootIndex: undefined,
+    };
 
-  let variables = globalConfigInstance.getAllVariables();
+    let variables = globalConfigInstance.getAllVariables();
 
-  if (variables.length === 0) {
-    await userCommunicationInstance.askApprove({
-      title: copy.noVariablesAddOne,
+    if (variables.length === 0) {
+      await userCommunicationInstance.askApprove({
+        title: copy.noVariablesAddOne,
+      });
+      variables = await addVariables();
+    }
+
+    const { data } = await newTemplatePipe({
+      data: { name: "", config: emptyConfig, fileNames: [] },
+      helperData: { variables },
     });
-    variables = await addVariables();
+
+    templatesInstance.addTemplate(data);
+
+    userCommunicationInstance.showMessage({
+      type: "info",
+      message: copy.templateWasAdded,
+    });
+  } catch (error) {
+    console.log(error);
   }
-
-  const { data } = await newTemplatePipe({
-    data: { name: "", config: emptyConfig, fileNames: [] },
-    helperData: { variables },
-  });
-
-  templatesInstance.addTemplate(data);
-
-  userCommunicationInstance.showMessage({
-    type: "info",
-    message: copy.templateWasAdded,
-  });
 };
