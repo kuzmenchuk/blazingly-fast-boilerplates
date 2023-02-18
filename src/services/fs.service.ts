@@ -1,4 +1,5 @@
 import * as fs from "fs";
+import * as vscode from "vscode";
 
 export class FsService {
   private static instance: FsService;
@@ -49,5 +50,20 @@ export class FsService {
 
   public writeFile(path: string, data: string) {
     return fs.writeFileSync(path, data);
+  }
+
+  public async openFile(
+    path: string,
+    { cursorPosition }: { cursorPosition?: [number, number] } = {}
+  ) {
+    const pathUri = vscode.Uri.file(path);
+    const textDocShowed = await vscode.window.showTextDocument(pathUri);
+
+    if (cursorPosition) {
+      console.log(cursorPosition);
+      textDocShowed.selection.with(new vscode.Position(...cursorPosition));
+    }
+
+    return textDocShowed;
   }
 }

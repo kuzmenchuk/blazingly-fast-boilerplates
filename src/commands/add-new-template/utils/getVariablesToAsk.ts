@@ -9,8 +9,8 @@ export const getVariablesToAsk: TPipeFn = async (arg) => {
     {
       title: "Please, choose the variables you want to use for this template.",
       canPickMany: true,
-      // because of canPickMany: true
     }
+    // because of canPickMany: true
   )) as unknown as string[];
 
   arg.data.config.variablesToAsk = answer;

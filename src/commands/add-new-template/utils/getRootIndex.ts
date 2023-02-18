@@ -8,20 +8,20 @@ const pathInstance = PathService.getInstance();
 export const getRootIndex: TPipeFn = async (arg) => {
   const answer = await userCommunicationInstance.askOptions(["Yes", "No"], {
     title:
-      "Do you want to add a line to a file out of boilerplate? Like, index.ts",
+      "Do you want to append string to a file out of boilerplate's scope? Like, global index.ts",
   });
 
   if (answer === "No") {
     return arg;
   }
 
-  await userCommunicationInstance.askOptions(["OK"], {
-    title: "Next, select the file where a line will be added",
+  await userCommunicationInstance.askApprove({
+    title: "Next, select the file to which you wanna add a line",
   });
 
   const file = await userCommunicationInstance.askChooseFile({
     canSelectMany: false,
-    title: "Please, select the file where a line will be added",
+    title: "Please, select the file",
     openLabel: "Select",
     canSelectFiles: true,
     canSelectFolders: false,
@@ -31,7 +31,8 @@ export const getRootIndex: TPipeFn = async (arg) => {
 
   const pattern = await userCommunicationInstance.askInput({
     title: "Please, provide the pattern",
-    placeHolder: `export { default as $$NAME } from "./$$NAME";`,
+    placeHolder: `\\nexport { default as $$NAME } from "./$$NAME";`,
+    prompt: "You can use variables and `\\n` for a new line",
   });
 
   arg.data.config.rootIndex = {

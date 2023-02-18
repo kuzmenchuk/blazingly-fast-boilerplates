@@ -9,9 +9,8 @@ const CORRECT_FOLDER_MSSG = "Yeah, that's correct!";
 const WRONG_COLDER_MSSG = "Nope, let me choose one more time";
 
 export const getPath: TPipeFn = async (arg) => {
-  await userCommunicationInstance.askOptions(["OK"], {
-    title:
-      "Next, select the folder where entities (from boilerplate) will be created",
+  await userCommunicationInstance.askApprove({
+    title: "Next, select the folder where boilerplates will be created",
   });
 
   arg.data.config.path = await askChooseFolder();
@@ -20,15 +19,15 @@ export const getPath: TPipeFn = async (arg) => {
 };
 
 const askChooseFolder = async (): Promise<string> => {
-  const file = await userCommunicationInstance.askChooseFile({
+  const folder = await userCommunicationInstance.askChooseFile({
     canSelectMany: false,
-    title: "Please, select the folder where entity should be created",
+    title: "Please, select the folder where boilerplates should be created",
     openLabel: "Select",
     canSelectFiles: false,
     canSelectFolders: true,
   });
 
-  const relativePath = pathInstance.createRelative(file.path);
+  const relativePath = pathInstance.createRelative(folder.path);
 
   const OK =
     (await userCommunicationInstance.askOptions(

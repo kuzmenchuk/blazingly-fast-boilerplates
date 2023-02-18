@@ -9,7 +9,7 @@ export const getFileNames: TPipeFn = async (arg) => {
     placeHolder: "$$NAME.component.tsx,$$NAME.modules.scss,index.ts",
   });
 
-  arg.data.fileNames = answer.split(",");
+  arg.data.fileNames = answer.split(",").map((str) => str.trim());
 
   return arg;
 };

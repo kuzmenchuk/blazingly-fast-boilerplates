@@ -54,6 +54,10 @@ export class UserCommunicationService {
     return assert(result);
   }
 
+  public async askApprove(options?: vscode.QuickPickOptions) {
+    this.askOptions(["OK"], options);
+  }
+
   public async askChooseFile(options: vscode.OpenDialogOptions) {
     const defaultUri = pathServiceInstance.workspaceUri();
     const file = await vscode.window.showOpenDialog({ defaultUri, ...options });

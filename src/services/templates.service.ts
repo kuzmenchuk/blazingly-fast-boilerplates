@@ -21,12 +21,12 @@ export class TemplatesService {
   private constructor() {}
 
   public static getInstance(): TemplatesService {
+    fsInstance.createIfNotExists(pathInstance.dotBfb(), "dir");
+    fsInstance.createIfNotExists(pathInstance.templates(), "dir");
+
     if (!this.instance) {
       this.instance = new TemplatesService();
     }
-
-    fsInstance.createIfNotExists(pathInstance.dotBfb(), "dir");
-    fsInstance.createIfNotExists(pathInstance.templates(), "dir");
 
     return this.instance;
   }

@@ -4,7 +4,7 @@ import {
 } from "../../services/templates.service";
 import { ConfigService } from "../../services/config.service";
 import { pipe } from "../../utils/index";
-import { addVariables } from "../index";
+import { addVariables } from "../add-variables/add-variables";
 import {
   getIsFolder,
   getTemplateName,
@@ -43,7 +43,7 @@ export const addNewTemplate = async () => {
   let variables = globalConfigInstance.getAllVariables();
 
   if (variables.length === 0) {
-    await userCommunicationInstance.askOptions(["OK"], {
+    await userCommunicationInstance.askApprove({
       title:
         "You don't have any variables. Add at least one to be able to use boilerplates.",
     });
