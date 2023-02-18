@@ -1,18 +1,10 @@
 import { PathService } from "./path.service";
 import { FsService } from "./fs.service";
 import { assert } from "../utils/index";
+import { IConfig, IVariable } from "../types/index";
 
 const pathInstance = PathService.getInstance();
 const fsInstance = FsService.getInstance();
-
-export interface IConfig {
-  globalVariables: IVariable[];
-}
-
-export interface IVariable {
-  name: string;
-  description?: string;
-}
 
 const emptyConfig: IConfig = {
   globalVariables: [],

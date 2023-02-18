@@ -1,5 +1,4 @@
-import { IVariable } from "../../services/config.service";
-import { ITemplateConfig } from "../../services/templates.service";
+import { IVariable, ITemplateConfig } from "../../types/index";
 
 export interface IPipeFnOptions {
   data: {

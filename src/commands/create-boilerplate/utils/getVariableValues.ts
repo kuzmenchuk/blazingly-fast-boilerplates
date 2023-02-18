@@ -1,3 +1,4 @@
+import { copy } from "../../../copy/index";
 import { UserCommunicationService } from "../../../services/user-communication.service";
 import { ConfigService } from "../../../services/config.service";
 import { TemplatesService } from "../../../services/templates.service";
@@ -16,7 +17,7 @@ export const getVariableValues: TPipeFn = async (args) => {
   const variablesEntries = await Promise.all(
     variables.map(async (variable) => {
       const answer = await userCommunicationInstance.askInput({
-        title: `Please, provide the value for ${variable.name}.`,
+        title: copy.provideValueFor.concat(variable.name),
         prompt: variable.description,
       });
       return [variable.name, answer];

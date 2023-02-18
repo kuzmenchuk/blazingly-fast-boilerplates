@@ -1,9 +1,9 @@
-import {
-  ITemplateConfig,
-  TemplatesService,
-} from "../../services/templates.service";
+import { TemplatesService } from "../../services/templates.service";
 import { ConfigService } from "../../services/config.service";
+import { UserCommunicationService } from "../../services/user-communication.service";
 import { pipe } from "../../utils/index";
+import { ITemplateConfig } from "../../types/index";
+import { copy } from "../../copy/index";
 import { addVariables } from "../add-variables/add-variables";
 import {
   getIsFolder,
@@ -15,7 +15,6 @@ import {
   getRootIndex,
 } from "./utils/index";
 import { IPipeFnOptions } from "./add-new-template.types";
-import { UserCommunicationService } from "../../services/user-communication.service";
 
 const templatesInstance = TemplatesService.getInstance();
 const globalConfigInstance = ConfigService.getInstance();
@@ -44,8 +43,7 @@ export const addNewTemplate = async () => {
 
   if (variables.length === 0) {
     await userCommunicationInstance.askApprove({
-      title:
-        "It seems like you don't have any variables added. Please, add one to continue.",
+      title: copy.noVariablesAddOne,
     });
     variables = await addVariables();
   }
@@ -59,6 +57,6 @@ export const addNewTemplate = async () => {
 
   userCommunicationInstance.showMessage({
     type: "info",
-    message: "Template was successfully added!",
+    message: copy.templateWasAdded,
   });
 };

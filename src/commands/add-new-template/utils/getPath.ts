@@ -1,3 +1,4 @@
+import { copy } from "../../../copy/index";
 import { PathService } from "../../../services/path.service";
 import { UserCommunicationService } from "../../../services/user-communication.service";
 import { TPipeFn } from "../add-new-template.types";
@@ -5,12 +6,9 @@ import { TPipeFn } from "../add-new-template.types";
 const userCommunicationInstance = UserCommunicationService.getInstance();
 const pathInstance = PathService.getInstance();
 
-const CORRECT_FOLDER_MSSG = "Yeah, that's correct!";
-const WRONG_COLDER_MSSG = "Nope, let me choose one more time";
-
 export const getPath: TPipeFn = async (arg) => {
   await userCommunicationInstance.askApprove({
-    title: "Next, select the folder where boilerplates will be created",
+    title: copy.selectFolderWhereCreateBoilerplates,
   });
 
   arg.data.config.path = await askChooseFolder();
@@ -21,8 +19,8 @@ export const getPath: TPipeFn = async (arg) => {
 const askChooseFolder = async (): Promise<string> => {
   const folder = await userCommunicationInstance.askChooseFile({
     canSelectMany: false,
-    title: "Please, select the folder where boilerplates should be created",
-    openLabel: "Select",
+    title: copy.selectFolderWhereCreateBoilerplates,
+    openLabel: copy.select,
     canSelectFiles: false,
     canSelectFolders: true,
   });
@@ -31,11 +29,11 @@ const askChooseFolder = async (): Promise<string> => {
 
   const OK =
     (await userCommunicationInstance.askOptions(
-      [CORRECT_FOLDER_MSSG, WRONG_COLDER_MSSG],
+      [copy.correct, copy.wrongLetsTryAgain],
       {
-        title: "Is the folder correct?".concat(" Path: " + relativePath),
+        title: copy.isFolderCorrect.concat(" Path: " + relativePath),
       }
-    )) === CORRECT_FOLDER_MSSG;
+    )) === copy.correct;
 
   if (OK) {
     return relativePath;

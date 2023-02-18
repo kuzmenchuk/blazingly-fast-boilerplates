@@ -1,19 +1,9 @@
 import { PathService } from "./path.service";
 import { FsService } from "./fs.service";
+import { ITemplateConfig } from "../types/index";
 
 const pathInstance = PathService.getInstance();
 const fsInstance = FsService.getInstance();
-
-export interface ITemplateConfig {
-  variablesToAsk: string[];
-  isFolder: boolean;
-  path: string;
-  fileToOpenAfterBoilerplateCreated?: string;
-  rootIndex?: {
-    path: string;
-    pattern: string;
-  };
-}
 
 export class TemplatesService {
   private static instance: TemplatesService;

@@ -1,3 +1,4 @@
+import { copy } from "../../../copy/index";
 import { PathService } from "../../../services/path.service";
 import { UserCommunicationService } from "../../../services/user-communication.service";
 import { TPipeFn } from "../add-new-template.types";
@@ -6,23 +7,25 @@ const userCommunicationInstance = UserCommunicationService.getInstance();
 const pathInstance = PathService.getInstance();
 
 export const getRootIndex: TPipeFn = async (arg) => {
-  const answer = await userCommunicationInstance.askOptions(["Yes", "No"], {
-    title:
-      "Do you want to append string to a file out of boilerplate's scope? Like, global index.ts",
-  });
+  const answer = await userCommunicationInstance.askOptions(
+    [copy.yes, copy.no],
+    {
+      title: copy.doYouWantAppendStringToGlobalFile,
+    }
+  );
 
-  if (answer === "No") {
+  if (answer === copy.no) {
     return arg;
   }
 
   await userCommunicationInstance.askApprove({
-    title: "Next, select the file to which you wanna add a line",
+    title: copy.selectFileWhereAppendString,
   });
 
   const file = await userCommunicationInstance.askChooseFile({
     canSelectMany: false,
-    title: "Please, select the file",
-    openLabel: "Select",
+    title: copy.selectFile,
+    openLabel: copy.select,
     canSelectFiles: true,
     canSelectFolders: false,
   });
@@ -30,9 +33,9 @@ export const getRootIndex: TPipeFn = async (arg) => {
   const relativePath = pathInstance.createRelative(file.path);
 
   const pattern = await userCommunicationInstance.askInput({
-    title: "Please, provide the pattern",
+    title: copy.providePattern,
     placeHolder: `\\nexport { default as $$NAME } from "./$$NAME";`,
-    prompt: "You can use variables and `\\n` for a new line",
+    prompt: copy.youCanUseVarsAndN,
   });
 
   arg.data.config.rootIndex = {

@@ -1,3 +1,4 @@
+import { copy } from "../../../copy/index";
 import { UserCommunicationService } from "../../../services/user-communication.service";
 import { TemplatesService } from "../../../services/templates.service";
 import { TPipeFn } from "../create-boilerplate.types";
@@ -10,7 +11,7 @@ export const getTemplateName: TPipeFn = async (args) => {
 
   if (templateNames.length > 1) {
     const answer = await userCommunicationInstance.askOptions(templateNames, {
-      title: "Please, choose the template.",
+      title: copy.chooseTemplate,
     });
 
     args.data.templateName = answer;

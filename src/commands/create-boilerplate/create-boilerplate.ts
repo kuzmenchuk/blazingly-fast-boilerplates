@@ -1,3 +1,4 @@
+import { copy } from "../../copy/index";
 import { FsService } from "../../services/fs.service";
 import { PathService } from "../../services/path.service";
 import { TemplatesService } from "../../services/templates.service";
@@ -27,8 +28,7 @@ export const createBoilerplate = async () => {
 
     if (templateNames.length === 0) {
       await userCommunicationInstance.askApprove({
-        title:
-          "It seems like you don't have any templates added. Please, add one to continue.",
+        title: copy.youDontHaveAnyTemplatesAddOne,
       });
       await addNewTemplate();
       // return because user should add boilerplate to the template files first.
