@@ -6,7 +6,7 @@ import {
   createBoilerplateFiles,
   getTemplateName,
   getVariableValues,
-  makeAbsolutePath,
+  createFolderIfNeeded,
   openFileAfterBoilerplateCreated,
   templateShouldExist,
 } from "./utils";
@@ -16,7 +16,7 @@ const boilerplatePipe = pipe(
   getTemplateName,
   getVariableValues,
   appendTemplateConfig,
-  makeAbsolutePath,
+  createFolderIfNeeded,
   createBoilerplateFiles,
   appendToGlobalFile,
   openFileAfterBoilerplateCreated

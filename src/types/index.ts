@@ -1,6 +1,7 @@
 export interface ITemplateConfig {
   variablesToAsk: string[];
   isFolder: boolean;
+  folderNameVariable?: string;
   path: string;
   fileToOpenAfterBoilerplateCreated?: string;
   rootIndex?: {

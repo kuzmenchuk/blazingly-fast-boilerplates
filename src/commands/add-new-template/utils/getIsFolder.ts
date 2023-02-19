@@ -14,5 +14,13 @@ export const getIsFolder: TPipeFn = async (arg) => {
 
   arg.data.config.isFolder = answer === copy.yes;
 
+  const { variablesToAsk, isFolder } = arg.data.config;
+  if (isFolder) {
+    arg.data.config.folderNameVariable =
+      await userCommunicationInstance.askOptions(variablesToAsk, {
+        title: copy.chooseVarForBoilerplateFolderName,
+      });
+  }
+
   return arg;
 };

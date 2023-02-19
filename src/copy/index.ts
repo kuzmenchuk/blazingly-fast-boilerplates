@@ -11,6 +11,8 @@ export const copy = {
     "Please, choose file which will be openned after boilerplate is created.",
   shouldBoilerplateCreateInFolder:
     "Should boilerplates be created in a folder?",
+  chooseVarForBoilerplateFolderName:
+    "Please, choose the variable for the folder name.",
   correct: "Yeah, that's correct!",
   wrongLetsTryAgain: "Nope, let me choose one more time",
   isFolderCorrect: "Is the folder correct?",
