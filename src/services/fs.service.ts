@@ -16,7 +16,7 @@ export class FsService {
 
   public createIfNotExists(path: string, type: "file" | "dir", fileData = "") {
     if (this.exists(path)) {
-      return;
+      return false;
     }
     if (type === "file") {
       this.createFile(path, fileData);
@@ -24,6 +24,7 @@ export class FsService {
     if (type === "dir") {
       this.createDir(path);
     }
+    return true;
   }
 
   public exists(path: string) {
