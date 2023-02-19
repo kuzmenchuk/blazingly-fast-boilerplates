@@ -6,10 +6,6 @@ import { IConfig, IVariable } from "../types/index";
 const pathInstance = PathService.getInstance();
 const fsInstance = FsService.getInstance();
 
-const emptyConfig: IConfig = {
-  globalVariables: [],
-};
-
 export class ConfigService {
   private static instance: ConfigService;
 
@@ -19,13 +15,6 @@ export class ConfigService {
     if (!this.instance) {
       this.instance = new ConfigService();
     }
-
-    fsInstance.createIfNotExists(pathInstance.dotBfb(), "dir");
-    fsInstance.createIfNotExists(
-      pathInstance.config(),
-      "file",
-      JSON.stringify(emptyConfig)
-    );
 
     return this.instance;
   }

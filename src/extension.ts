@@ -4,21 +4,31 @@ import {
   addVariables,
   createBoilerplate,
 } from "./commands/index";
+import { init } from "./utils";
 
 export function activate(context: vscode.ExtensionContext) {
   let newTemplate = vscode.commands.registerCommand(
     "blazingly-fast-boilerplates.addNewTemplate",
-    addNewTemplate
+    () => {
+      init();
+      addNewTemplate();
+    }
   );
 
   let newVariable = vscode.commands.registerCommand(
     "blazingly-fast-boilerplates.addVariables",
-    addVariables
+    () => {
+      init();
+      addVariables();
+    }
   );
 
   let newBoilerplate = vscode.commands.registerCommand(
     "blazingly-fast-boilerplates.createBoilerplate",
-    createBoilerplate
+    () => {
+      init();
+      createBoilerplate();
+    }
   );
 
   context.subscriptions.push(newTemplate, newVariable, newBoilerplate);
