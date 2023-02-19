@@ -40,4 +40,6 @@ export const copy = {
   provideValueFor: "Please, provide the value for ",
   startVarNameWithDollars:
     "Please, start the variable name from two dollar signs: `$$`. Example: $$NAME",
+  addPrettierIgnore:
+    "We recommend you to add .bfb folder to .prettierignore file. Add it now?",
 };
