@@ -32,9 +32,11 @@ export const getRootIndex: TPipeFn = async (arg) => {
 
   const relativePath = pathInstance.createRelative(file.path);
 
+  const variable = arg.helperData.variables[0]?.name ?? "$$NAME";
+
   const pattern = await userCommunicationInstance.askInput({
     title: copy.providePattern,
-    placeHolder: `\\nexport { default as $$NAME } from "./$$NAME";`,
+    placeHolder: `\\nexport { default as ${variable} } from "./${variable}";`,
     prompt: copy.youCanUseVarsAndN,
   });
 
