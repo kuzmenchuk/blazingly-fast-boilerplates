@@ -29,7 +29,6 @@ export const copy = {
   selectAtLeastOneVar: "Please, select at least one variable",
   provideNameOfVar:
     "Please, provide the name of the variable. Use uppercase snake case with $$ at the beginning.",
-  provideDescriptionOfVar: "Please, provide the description of the variable",
   oneMore: "One more",
   thatsAll: "That's all",
   doYouWannaAddMoreVars: "Do you wanna add one more variable?",
@@ -37,4 +36,6 @@ export const copy = {
     "It seems like you don't have any templates added. Please, add one to continue.",
   chooseTemplate: "Please, choose the template.",
   provideValueFor: "Please, provide the value for ",
+  startVarNameWithDollars:
+    "Please, start the variable name from two dollar signs: `$$`. Example: $$NAME",
 };

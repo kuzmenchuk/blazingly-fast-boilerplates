@@ -15,5 +15,4 @@ export interface IConfig {
 
 export interface IVariable {
   name: string;
-  description?: string;
 }

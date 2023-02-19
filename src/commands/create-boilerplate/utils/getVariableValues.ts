@@ -18,7 +18,6 @@ export const getVariableValues: TPipeFn = async (args) => {
     variables.map(async (variable) => {
       const answer = await userCommunicationInstance.askInput({
         title: copy.provideValueFor.concat(variable.name),
-        prompt: variable.description,
       });
       return [variable.name, answer];
     })
