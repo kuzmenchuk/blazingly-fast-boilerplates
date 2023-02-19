@@ -13,9 +13,6 @@ export const appendToGlobalFile: TPipeFn = async (arg) => {
     throw new Error("Template config should exist");
   }
 
-  const adjustVariables = (str: string) =>
-    replaceWithValues(str, data.variableValues);
-
   if (templateConfig.rootIndex) {
     const rootIndexPath = pathInstance.createAbsolute(
       templateConfig.rootIndex.path
@@ -23,7 +20,10 @@ export const appendToGlobalFile: TPipeFn = async (arg) => {
 
     fsInstance.appendFile(
       rootIndexPath,
-      adjustVariables(templateConfig.rootIndex.pattern).replace(/\\n/g, "\n")
+      replaceWithValues(
+        templateConfig.rootIndex.pattern,
+        data.variableValues
+      ).replace(/\\n/g, "\n")
     );
   }
 

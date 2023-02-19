@@ -1,4 +1,4 @@
-import { copy } from "../../../copy";
+import { copy } from "../../../copy/index";
 import { UserCommunicationService } from "../../../services/user-communication.service";
 
 const userCommunicationInstance = UserCommunicationService.getInstance();

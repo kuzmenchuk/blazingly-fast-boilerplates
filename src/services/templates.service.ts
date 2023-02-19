@@ -2,18 +2,12 @@ import { PathService } from "./path.service";
 import { FsService } from "./fs.service";
 import { ITemplateConfig } from "../types/index";
 
-const pathInstance = PathService.getInstance();
-const fsInstance = FsService.getInstance();
-
 export class TemplatesService {
   private static instance: TemplatesService;
 
   private constructor() {}
 
   public static getInstance(): TemplatesService {
-    fsInstance.createIfNotExists(pathInstance.dotBfb(), "dir");
-    fsInstance.createIfNotExists(pathInstance.templates(), "dir");
-
     if (!this.instance) {
       this.instance = new TemplatesService();
     }
@@ -22,15 +16,24 @@ export class TemplatesService {
   }
 
   public config(name: string) {
+    const pathInstance = PathService.getInstance();
+    const fsInstance = FsService.getInstance();
+
     const json = fsInstance.readFile(pathInstance.templateConfig(name));
     return JSON.parse(json) as ITemplateConfig;
   }
 
   public getAllTemplateNames() {
+    const pathInstance = PathService.getInstance();
+    const fsInstance = FsService.getInstance();
+
     return fsInstance.readDir(pathInstance.templates());
   }
 
   public getTemplateFiles(name: string) {
+    const pathInstance = PathService.getInstance();
+    const fsInstance = FsService.getInstance();
+
     return fsInstance
       .readDir(pathInstance.templates(name))
       .filter((fileName) => fileName !== pathInstance.CONFIG_FILE_NAME);
@@ -45,6 +48,9 @@ export class TemplatesService {
     config: ITemplateConfig;
     fileNames: string[];
   }) {
+    const pathInstance = PathService.getInstance();
+    const fsInstance = FsService.getInstance();
+
     fsInstance.createDir(pathInstance.templates(name));
     fsInstance.createFile(
       pathInstance.templateConfig(name),

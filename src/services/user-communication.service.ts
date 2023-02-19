@@ -8,8 +8,6 @@ interface Options {
   items?: string[];
 }
 
-const pathServiceInstance = PathService.getInstance();
-
 export class UserCommunicationService {
   private static instance: UserCommunicationService;
 
@@ -62,6 +60,7 @@ export class UserCommunicationService {
   }
 
   public async askChooseFile(options: vscode.OpenDialogOptions) {
+    const pathServiceInstance = PathService.getInstance();
     const defaultUri = pathServiceInstance.workspaceUri();
     const file = await vscode.window.showOpenDialog({ defaultUri, ...options });
     return assert(file && file[0]);

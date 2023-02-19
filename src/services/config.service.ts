@@ -3,9 +3,6 @@ import { FsService } from "./fs.service";
 import { assert } from "../utils/index";
 import { IConfig, IVariable } from "../types/index";
 
-const pathInstance = PathService.getInstance();
-const fsInstance = FsService.getInstance();
-
 export class ConfigService {
   private static instance: ConfigService;
 
@@ -20,6 +17,9 @@ export class ConfigService {
   }
 
   public addVariables(variables: IVariable[]) {
+    const pathInstance = PathService.getInstance();
+    const fsInstance = FsService.getInstance();
+
     const config = this.config();
     config.globalVariables.push(...variables);
     fsInstance.writeFile(pathInstance.config(), JSON.stringify(config));
@@ -36,6 +36,9 @@ export class ConfigService {
   }
 
   private config() {
+    const pathInstance = PathService.getInstance();
+    const fsInstance = FsService.getInstance();
+
     const json = fsInstance.readFile(pathInstance.config());
     return JSON.parse(json) as IConfig;
   }

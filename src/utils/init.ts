@@ -1,18 +1,18 @@
-import { copy } from "../copy";
+import { copy } from "../copy/index";
 import { FsService } from "../services/fs.service";
 import { PathService } from "../services/path.service";
 import { UserCommunicationService } from "../services/user-communication.service";
-import { IConfig } from "../types";
-
-const fsInstance = FsService.getInstance();
-const pathInstance = PathService.getInstance();
-const userCommunicationInstance = UserCommunicationService.getInstance();
+import { IConfig } from "../types/index";
 
 const emptyConfig: IConfig = {
   globalVariables: [],
 };
 
 export const init = async () => {
+  const fsInstance = FsService.getInstance();
+  const pathInstance = PathService.getInstance();
+  const userCommunicationInstance = UserCommunicationService.getInstance();
+
   const wasCreated = fsInstance.createIfNotExists(pathInstance.dotBfb(), "dir");
 
   fsInstance.createIfNotExists(
