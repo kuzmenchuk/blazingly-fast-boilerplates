@@ -30,6 +30,7 @@ export const init = async () => {
     );
 
     if (answer === copy.yes) {
+      // add config root to .prettierignore
       const alreadyExist = !fsInstance.createIfNotExists(
         pathInstance.createAbsolute(".prettierignore"),
         "file",

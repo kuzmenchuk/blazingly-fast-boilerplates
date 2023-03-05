@@ -13,15 +13,14 @@ export const addVariables = async () => {
   try {
     const adding = async () => {
       const name = await getVarName();
-
       variables.push({ name });
 
       const answer = await userCommunicationInstance.askOptions(
         [copy.oneMore, copy.thatsAll],
         { title: copy.doYouWannaAddMoreVars }
       );
-
       const oneMore = answer === copy.oneMore;
+
       if (oneMore) {
         await adding();
       }
