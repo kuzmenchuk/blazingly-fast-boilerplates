@@ -50,7 +50,7 @@ And each time we need a component, we simply run a “Create boilerplate” comm
 
 BFB extension is not on the marketplace yet, so you should manually download it and install. Don’t worry, it’s easy:
 
-1.  Download the extension. Here’s a [link](https://kuzmenchuk.com/bfb).
+1.  You can download the extension from the last release in the Github Releases section. Extension will be in assets with name, like `blazingly-fast-boilerplates-[version].vsix`
 2.  In the VS Code, open the commands dropdown (cmd+shift+p) and choose the **"Extensions: Install from VSIX"**
 3.  Choose the extension file.
 4.  Extension should be installed.
