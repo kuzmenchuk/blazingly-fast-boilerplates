@@ -1,8 +1,18 @@
 {
   "name": "blazingly-fast-boilerplates",
-  "displayName": "blazingly-fast-boilerplates",
-  "description": "",
-  "version": "0.0.1",
+  "displayName": "Blazingly Fast Boilerplates",
+  "description": "Blazingly Fast Boilerplates (BFB) helps you creating boilerplates with no struggle!",
+  "author": {
+    "name": "Dima Kuzmenchuk",
+    "url": "https://kuzmenchuk.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kuzmenchuk/blazingly-fast-boilerplates.git"
+  },
+  "homepage": "https://github.com/kuzmenchuk/blazingly-fast-boilerplates/blob/main/README.md",
+  "publisher": "Dima Kuzmenchuk",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.75.0"
   },
