@@ -20,7 +20,7 @@ const templatesInstance = TemplatesService.getInstance();
 const globalConfigInstance = ConfigService.getInstance();
 const userCommunicationInstance = UserCommunicationService.getInstance();
 
-const newTemplatePipe = pipe<IPipeFnOptions>(
+const newTemplatePipe = pipe(
   getTemplateName,
   getVariablesToAsk,
   getPath,
