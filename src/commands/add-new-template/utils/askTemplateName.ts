@@ -4,7 +4,7 @@ import { TPipeFn } from "../add-new-template.types";
 
 const userCommunicationInstance = UserCommunicationService.getInstance();
 
-export const getTemplateName: TPipeFn = async (arg) => {
+export const askTemplateName: TPipeFn = async (arg) => {
   arg.data.name = await userCommunicationInstance.askInput({
     title: copy.provideNameOfTemplate,
   });

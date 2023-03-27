@@ -4,29 +4,27 @@ import { UserCommunicationService } from "../../services/user-communication.serv
 import { IVariable } from "../../types/index";
 import { getVarName } from "./utils/getVarName";
 
-const configInstance = ConfigService.getInstance();
-const userCommunicationInstance = UserCommunicationService.getInstance();
-
 export const addVariables = async () => {
+  const configInstance = ConfigService.getInstance();
+  const userCommunicationInstance = UserCommunicationService.getInstance();
+
   const variables: IVariable[] = [];
 
   try {
-    const adding = async () => {
-      const name = await getVarName();
-      variables.push({ name });
+    const addingVariableRecursive = async () => {
+      variables.push({ name: await getVarName() });
 
       const answer = await userCommunicationInstance.askOptions(
         [copy.oneMore, copy.thatsAll],
         { title: copy.doYouWannaAddMoreVars }
       );
-      const oneMore = answer === copy.oneMore;
 
-      if (oneMore) {
-        await adding();
+      if (answer === copy.oneMore) {
+        await addingVariableRecursive();
       }
     };
 
-    await adding();
+    await addingVariableRecursive();
   } catch (error) {
     console.log(error);
   } finally {

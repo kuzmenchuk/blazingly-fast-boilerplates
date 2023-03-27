@@ -1,24 +1,26 @@
 import { pipe } from "../../utils";
 import { IPipeFnOptions } from "./create-boilerplate.types";
 import {
-  appendTemplateConfig,
-  appendToGlobalFile,
+  getTemplateConfig,
+  appendStringToGlobalIndex,
   createBoilerplateFiles,
-  getTemplateName,
-  getVariableValues,
+  askTemplateName,
+  askValuesForVariables,
   createFolderIfNeeded,
   openFileAfterBoilerplateCreated,
-  templateShouldExist,
+  askAddTemplateIfNoneExists,
+  replaceRelativePathWithAbsolute,
 } from "./utils";
 
 const boilerplatePipe = pipe(
-  templateShouldExist,
-  getTemplateName,
-  getVariableValues,
-  appendTemplateConfig,
+  askAddTemplateIfNoneExists,
+  askTemplateName,
+  askValuesForVariables,
+  getTemplateConfig,
+  replaceRelativePathWithAbsolute,
   createFolderIfNeeded,
   createBoilerplateFiles,
-  appendToGlobalFile,
+  appendStringToGlobalIndex,
   openFileAfterBoilerplateCreated
 );
 

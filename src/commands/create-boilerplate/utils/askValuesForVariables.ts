@@ -8,7 +8,7 @@ const userCommunicationInstance = UserCommunicationService.getInstance();
 const templateInstance = TemplatesService.getInstance();
 const configInstance = ConfigService.getInstance();
 
-export const getVariableValues: TPipeFn = async (args) => {
+export const askValuesForVariables: TPipeFn = async (args) => {
   const { variablesToAsk } = templateInstance.config(args.data.templateName);
   const variables = configInstance
     .getAllVariables()

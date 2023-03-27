@@ -4,7 +4,7 @@ import { TPipeFn } from "../add-new-template.types";
 
 const userCommunicationInstance = UserCommunicationService.getInstance();
 
-export const getIsFolder: TPipeFn = async (arg) => {
+export const askIsFolder: TPipeFn = async (arg) => {
   const answer = await userCommunicationInstance.askOptions(
     [copy.yes, copy.no],
     {

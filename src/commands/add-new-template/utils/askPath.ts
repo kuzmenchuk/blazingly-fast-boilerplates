@@ -6,7 +6,7 @@ import { TPipeFn } from "../add-new-template.types";
 const userCommunicationInstance = UserCommunicationService.getInstance();
 const pathInstance = PathService.getInstance();
 
-export const getPath: TPipeFn = async (arg) => {
+export const askPath: TPipeFn = async (arg) => {
   await userCommunicationInstance.askApprove({
     title: copy.selectFolderWhereCreateBoilerplates,
   });

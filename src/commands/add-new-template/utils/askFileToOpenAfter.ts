@@ -4,7 +4,7 @@ import { TPipeFn } from "../add-new-template.types";
 
 const userCommunicationInstance = UserCommunicationService.getInstance();
 
-export const getFileToOpenAfter: TPipeFn = async (arg) => {
+export const askFileToOpenAfter: TPipeFn = async (arg) => {
   const answer = await userCommunicationInstance.askOptions(
     arg.data.fileNames,
     {

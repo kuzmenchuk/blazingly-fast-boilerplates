@@ -10,7 +10,6 @@ const pathInstance = PathService.getInstance();
 
 export const createBoilerplateFiles: TPipeFn = async (arg) => {
   const { data, templateConfig } = arg;
-
   if (!templateConfig) {
     throw new Error("Template config should exist");
   }
