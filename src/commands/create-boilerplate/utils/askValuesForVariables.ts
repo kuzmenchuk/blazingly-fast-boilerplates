@@ -14,14 +14,14 @@ export const askValuesForVariables: TPipeFn = async (args) => {
     .getAllVariables()
     .filter((variable) => variablesToAsk.includes(variable.name));
 
-  const variablesEntries = await Promise.all(
-    variables.map(async (variable) => {
-      const answer = await userCommunicationInstance.askInput({
-        title: copy.provideValueFor.concat(variable.name),
-      });
-      return [variable.name, answer];
-    })
-  );
+  const variablesEntries: [string, string][] = [];
+
+  for (const variable of variables) {
+    const answer = await userCommunicationInstance.askInput({
+      title: copy.provideValueFor.concat(variable.name),
+    });
+    variablesEntries.push([variable.name, answer]);
+  }
 
   args.data.variableValues = Object.fromEntries(variablesEntries);
 
