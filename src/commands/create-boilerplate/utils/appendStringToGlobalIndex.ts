@@ -6,9 +6,8 @@ import { TPipeFn } from "../create-boilerplate.types";
 const fsInstance = FsService.getInstance();
 const pathInstance = PathService.getInstance();
 
-export const appendToGlobalFile: TPipeFn = async (arg) => {
+export const appendStringToGlobalIndex: TPipeFn = async (arg) => {
   const { templateConfig, data } = arg;
-
   if (!templateConfig) {
     throw new Error("Template config should exist");
   }

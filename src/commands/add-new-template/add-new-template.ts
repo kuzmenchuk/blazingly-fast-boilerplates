@@ -6,36 +6,35 @@ import { ITemplateConfig, IVariable } from "../../types/index";
 import { copy } from "../../copy/index";
 import { addVariables } from "../add-variables/add-variables";
 import {
-  getIsFolder,
-  getTemplateName,
-  getVariablesToAsk,
-  getPath,
-  getFileNames,
-  getFileToOpenAfter,
-  getRootIndex,
+  askIsFolder,
+  askTemplateName,
+  askVariablesToAsk,
+  askPath,
+  askFileNames,
+  askFileToOpenAfter,
+  askRootIndex,
 } from "./utils/index";
 import { IPipeFnOptions } from "./add-new-template.types";
 
-const templatesInstance = TemplatesService.getInstance();
-const globalConfigInstance = ConfigService.getInstance();
-const userCommunicationInstance = UserCommunicationService.getInstance();
-
-const newTemplatePipe = pipe<IPipeFnOptions>(
-  getTemplateName,
-  getVariablesToAsk,
-  getPath,
-  getIsFolder,
-  getFileNames,
-  getFileToOpenAfter,
-  getRootIndex
+const newTemplatePipe = pipe(
+  askTemplateName,
+  askVariablesToAsk,
+  askPath,
+  askIsFolder,
+  askFileNames,
+  askFileToOpenAfter,
+  askRootIndex
 );
 
 export const addNewTemplate = async () => {
+  const templatesInstance = TemplatesService.getInstance();
+
   try {
     const arg = await createArg();
     const { data } = await newTemplatePipe(arg);
 
     templatesInstance.addTemplate(data);
+
     showSuccessMessage();
   } catch (error) {
     console.log(error);
@@ -60,6 +59,9 @@ const createArg = async (): Promise<IPipeFnOptions> => {
 };
 
 const getVariables = async (): Promise<IVariable[]> => {
+  const globalConfigInstance = ConfigService.getInstance();
+  const userCommunicationInstance = UserCommunicationService.getInstance();
+
   let variables = globalConfigInstance.getAllVariables();
 
   if (variables.length === 0) {
@@ -73,6 +75,7 @@ const getVariables = async (): Promise<IVariable[]> => {
 };
 
 const showSuccessMessage = () => {
+  const userCommunicationInstance = UserCommunicationService.getInstance();
   userCommunicationInstance.showMessage({
     type: "info",
     message: copy.templateWasAdded,

@@ -4,24 +4,21 @@ With Blazingly Fast Boilerplates (BFB) you can create your boilerplates blazingl
 
 ## Motivation behind BFB
 
-Hi, I’m a Frontend Developer and have had created a lot of UI views, components, pages in my life. And each one of them had the same beginning: create new folder, create files, `index.ts`, add export to the global `index.ts`, etc. It is frustrating.
+Hi, I’m a Frontend Developer and I created a lot of UI views, components, pages in my life. Each one of them had the same beginning: create new folder, create files, `index.ts`, add export to the global `index.ts`, etc. It was frustrating.
 
-I used snippets, but they do not 100% solve the problem: files & folders still should be created and export still should be added to a "global" `index.ts`. Also, I, personally, am not a fan of snippets UX (both creating & using).
+I used snippets, but they did not 100% solve the problem: files & folders still should be created and export still should be added to a "global" `index.ts`. Also, I, personally, am not a fan of snippets UX (both creating & using).
 
-So, I decided to create an extension that will solve my problem and I can create boilerplates blazingly fast!
+So, I decided to create an extension that will solve my problem and I could create boilerplates blazingly fast!
 
 ## About BFB (Blazingly Fast Boilerplates)
 
-The idea is simple. There’re 3 entities: variables, templates and boilerplates. You should see it as a following…
+There’re 3 entities: variables, templates and boilerplates. BFB creates a boilerplate by coping a template and replacing its variables with values provided by you.
 
-> Template is a function, that receives arguments (defined in variables) from a developer and returns (creates) a boilerplate.
-
-For example, we can create a `component` template with one variable `$$NAME`. It is gonna have two files:
+For example, we can create a `component` template with one variable `$$NAME`, and it's gonna have two files:
 
 `$$NAME.component.tsx`:
 
 ```tsx
-
 interface $$NAMEProps {
 
 }
@@ -33,7 +30,6 @@ const $$NAME = ({}: $$NAMEProps) => {
 };
 
 export default $$NAME;
-
 ```
 
 `index.ts`:
@@ -65,39 +61,35 @@ After the extension is installed, open the commands dropdown and choose the **"B
     3. Provide a variable name, that you gonna use while defining a template. It should be uppercase, snake case with two dollar signs at the beginning, like `$$NAME`
     4. You can add more variables if you need to.
 2.  Provide the template name.
-    It is needed, so you can choose from which template you wanna create a boilerplate.
 3.  Choose which variables you wanna use with this template.
-    You can use chosen variables while defining the template & provide value for them while creating a boilerplate.
-4.  Select the folder, where a boilerplate will be created.
-5.  Choose if the boilerplate should be created in a folder or should it be a single file?
+    You can use chosen variables while defining the template & you will have to provide value for them while creating a boilerplate.
+4.  Select the folder, where the boilerplates will be created.
+5.  Choose if the boilerplate should be created in its own folder or not.
     `/src/components/$$NAME.tsx` vs `/src/components/$$NAME/[..files]`
-    1. If it should be created in a folder, please provide the variable to use to name the folder.
+    1. If it should be created in a folder, please provide the variable for folder name.
 6.  Provide boilerplate filenames.
-    If you don’t create a boilerplate in the folder, please, provide one filename.
     You can use your variables here.
 7.  Choose which file should be opened after boilerplate is created.
 8.  Do you want to append a string to some global file?
     It is useful if you use export from the folders, like `src/components/index.ts`
-    1. Select the file, where you wanna append a string
-    2. Provide the pattern you wanna add.
+    1. Select the file to which you wanna append a string
+    2. Provide the string pattern.
        You can use `\n` for a new line and template variables
 9.  The template config is created!
-10. Now, please, define the files (you can see it as snippets) and you will be ready to create boilerplates blazingly fast!
-    REMEMBER: You can type `$1` in the template to exactly place your cursor after creating a boilerplate.
+10. Now define the files and you're ready to create boilerplates blazingly fast!
+    REMEMBER: You can type `$1` in the template to place the cursor after creating a boilerplate.
 
 ### "BFB: Create Boilerplate..."
 
 This is the reason why the extension exists. Create boilerplates blazingly fast!
 
 1.  Choose the template you wanna use (if there’s only one template, it will be chosen by default)
-2.  Provide values for all your variables
-3.  Code your functionality! Wasn’t it blazingly fast?!
+2.  Provide the values for the variables
+3.  Wasn’t it blazingly fast?!
 
 ![](assets/creating-boilerplate.gif)
 
 ### "BFB: Add New Variable"
-
-If you need more variables, you can add ones.
 
 1.  Provide variable name
 2.  Repeat the flow if you wanna add more variables or finish it.

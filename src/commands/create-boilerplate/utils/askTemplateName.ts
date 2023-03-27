@@ -6,7 +6,7 @@ import { TPipeFn } from "../create-boilerplate.types";
 const templatesInstance = TemplatesService.getInstance();
 const userCommunicationInstance = UserCommunicationService.getInstance();
 
-export const getTemplateName: TPipeFn = async (args) => {
+export const askTemplateName: TPipeFn = async (args) => {
   const templateNames = templatesInstance.getAllTemplateNames();
 
   if (templateNames.length > 1) {
